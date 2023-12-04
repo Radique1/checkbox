@@ -1,0 +1,36 @@
+version: "4.22"
+services:
+  nginx:
+    container_name: checkbox_nginx
+    build:
+      context: .
+      dockerfile: Docker/nginx/Dockerfile
+    working_dir: /etc/nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www/checkbox
+  php:
+    container_name: checkbox_php
+    build:
+      context: .
+      dockerfile: Docker/php/Dockerfile
+    working_dir: /var/www/checkbox
+    ports:
+      - "8000:8000"
+    expose:
+      - 9003
+    volumes:
+      - ./:/var/www/checkbox
+  pgsql:
+    container_name: checkbox_pgsql
+    build:
+      context: .
+      dockerfile: Docker/pgsql/Dockerfile
+    working_dir: /etc/pgsql
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres

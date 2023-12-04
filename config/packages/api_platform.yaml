@@ -1,0 +1,44 @@
+api_platform:
+    title: Hello API Platform
+    version: 1.0.0
+    formats:
+        jsonld: ['application/ld+json']
+    docs_formats:
+        jsonld: ['application/ld+json']
+        jsonopenapi: ['application/vnd.openapi+json']
+        html: ['text/html']
+    defaults:
+        stateless: true
+        cache_headers:
+            vary: ['Content-Type', 'Authorization', 'Origin']
+        extra_properties:
+            standard_put: true
+            rfc_7807_compliant_errors: true
+        pagination_enabled: true
+        pagination_items_per_page: 10
+    event_listeners_backward_compatibility_layer: false
+    keep_legacy_inflector: false
+
+    # Enable the Swagger documentation and export.
+    enable_swagger: true
+
+    # Enable Swagger ui.
+    enable_swagger_ui: true
+
+    swagger:
+        api_keys:
+            JWT:
+                name: Authorization
+                type: header
+
+
+    eager_loading:
+        # To enable or disable eager loading.
+        enabled: false
+
+        # Max number of joined relations before EagerLoading throws a RuntimeException.
+        max_joins: 50
+
+        # Force join on every relation.
+        # If disabled, it will only join relations having the EAGER fetch mode.
+        force_eager: false
